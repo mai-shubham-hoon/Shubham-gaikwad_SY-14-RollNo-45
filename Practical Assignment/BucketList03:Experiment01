@@ -1,0 +1,83 @@
+class BankAccount:
+    # Static/Class variable
+    interest_rate = 5.0
+
+    def __init__(self, name, balance):
+        self.name = name
+        self.balance = balance
+
+    # Class method to update interest rate
+    @classmethod
+    def update_interest_rate(cls, new_rate):
+        cls.interest_rate = new_rate
+
+    # Instance method to calculate compound interest
+    def calculate_interest(self, years):
+        amount = self.balance * (1 + BankAccount.interest_rate / 100) ** years
+        interest = amount - self.balance
+
+        print("Account Holder:", self.name)
+        print("Principal:", self.balance)
+        print("Interest Rate:", BankAccount.interest_rate, "%")
+        print("Interest:", round(interest, 2))
+        print("Final Amount:", round(amount, 2))
+        print()
+
+
+# Create accounts
+account1 = BankAccount("Shubham", 10000)
+account2 = BankAccount("Rahul", 20000)
+
+# Calculate interest with initial rate
+print("Before Interest Rate Change:")
+account1.calculate_interest(2)
+account2.calculate_interest(2)
+
+# Update interest rate for all accounts
+BankAccount.update_interest_rate(7.0)
+
+# Calculate interest after rate change
+print("After Interest Rate Change:")
+account1.calculate_interest(2)
+account2.calculate_interest(2)class BankAccount:
+    # Static/Class variable
+    interest_rate = 5.0
+
+    def __init__(self, name, balance):
+        self.name = name
+        self.balance = balance
+
+    # Class method to update interest rate
+    @classmethod
+    def update_interest_rate(cls, new_rate):
+        cls.interest_rate = new_rate
+
+    # Instance method to calculate compound interest
+    def calculate_interest(self, years):
+        amount = self.balance * (1 + BankAccount.interest_rate / 100) ** years
+        interest = amount - self.balance
+
+        print("Account Holder:", self.name)
+        print("Principal:", self.balance)
+        print("Interest Rate:", BankAccount.interest_rate, "%")
+        print("Interest:", round(interest, 2))
+        print("Final Amount:", round(amount, 2))
+        print()
+
+
+# Create accounts
+account1 = BankAccount("Shubham", 10000)
+account2 = BankAccount("Rahul", 20000)
+
+# Calculate interest with initial rate
+print("Before Interest Rate Change:")
+account1.calculate_interest(2)
+account2.calculate_interest(2)
+
+# Update interest rate for all accounts
+BankAccount.update_interest_rate(7.0)
+
+# Calculate interest after rate change
+print("After Interest Rate Change:")
+account1.calculate_interest(2)
+account2.calculate_interest(2)
