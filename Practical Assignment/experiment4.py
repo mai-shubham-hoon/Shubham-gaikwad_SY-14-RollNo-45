@@ -1,0 +1,16 @@
+import random
+
+# Generate temperature data for 24 hours
+temperatures = [random.randint(20, 35) for _ in range(24)]
+
+print("Hourly Temperatures:")
+print(temperatures)
+
+# Calculate minimum, maximum and average
+minimum = min(temperatures)
+maximum = max(temperatures)
+average = sum(temperatures) / len(temperatures)
+
+print("\nMinimum Temperature:", minimum, "°C")
+print("Maximum Temperature:", maximum, "°C")
+print("Average Temperature:", round(average, 2), "°C")

@@ -1,0 +1,88 @@
+# Delivery Drone - Knapsack Problem
+
+# 15 trips: (Delivery Value, Battery Cost)
+trips = [
+    (60, 10),
+    (100, 20),
+    (120, 30),
+    (80, 15),
+    (90, 18),
+    (75, 12),
+    (50, 8),
+    (110, 25),
+    (65, 14),
+    (95, 22),
+    (70, 16),
+    (85, 17),
+    (55, 9),
+    (105, 24),
+    (40, 7)
+]
+
+# Maximum battery capacity
+capacity = 100
+
+# ---------------- TOP-DOWN ----------------
+def knapsack_top_down(n, capacity, memo={}):
+    if n == 0 or capacity == 0:
+        return 0
+
+    if (n, capacity) in memo:
+        return memo[(n, capacity)]
+
+    value, battery = trips[n - 1]
+
+    if battery > capacity:
+        result = knapsack_top_down(n - 1, capacity, memo)
+    else:
+        include = value + knapsack_top_down(
+            n - 1, capacity - battery, memo
+        )
+        exclude = knapsack_top_down(n - 1, capacity, memo)
+        result = max(include, exclude)
+
+    memo[(n, capacity)] = result
+    return result
+
+
+# ---------------- BOTTOM-UP ----------------
+def knapsack_bottom_up():
+    n = len(trips)
+
+    dp = [[0] * (capacity + 1) for _ in range(n + 1)]
+
+    for i in range(1, n + 1):
+        value, battery = trips[i - 1]
+
+        for b in range(capacity + 1):
+            if battery <= b:
+                dp[i][b] = max(
+                    dp[i - 1][b],
+                    value + dp[i - 1][b - battery]
+                )
+            else:
+                dp[i][b] = dp[i - 1][b]
+
+    return dp[n][capacity]
+
+
+# Calculate results
+top_down_result = knapsack_top_down(len(trips), capacity)
+bottom_up_result = knapsack_bottom_up()
+
+# Display trips
+print("Delivery Trips:")
+for i, (value, battery) in enumerate(trips, 1):
+    print("Trip", i, "- Value:", value, 
+          "Battery:", battery)
+
+print("\nMaximum Battery Capacity:", capacity)
+
+print("\nTop-Down Result:", top_down_result)
+print("Bottom-Up Result:", bottom_up_result)
+
+# Compare results
+if top_down_result == bottom_up_result:
+    print("\nBoth methods give the same optimal value.")
+else:
+    print("\nResults are different.")

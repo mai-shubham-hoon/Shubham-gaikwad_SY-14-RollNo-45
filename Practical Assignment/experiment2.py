@@ -1,0 +1,28 @@
+# Base class
+class Animal:
+    def speak(self):
+        print("Animal makes a sound")
+
+
+# Derived class
+class Lion(Animal):
+    def speak(self):
+        print("Lion: Roar!")
+
+
+class Monkey(Animal):
+    def speak(self):
+        print("Monkey: Ooh Ooh Aah Aah!")
+
+
+class Snake(Animal):
+    def speak(self):
+        print("Snake: Hiss!")
+
+
+# List of mixed animal objects
+animals = [Lion(), Monkey(), Snake()]
+
+# Polymorphism
+for animal in animals:
+    animal.speak()
