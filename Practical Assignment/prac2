@@ -1,0 +1,35 @@
+# Advanced Python - Decorator Example
+
+# Decorator function
+def calculate_grade(func):
+    def wrapper(name, marks):
+        average = sum(marks) / len(marks)
+
+        if average >= 90:
+            grade = "A+"
+        elif average >= 75:
+            grade = "A"
+        elif average >= 60:
+            grade = "B"
+        elif average >= 50:
+            grade = "C"
+        else:
+            grade = "F"
+
+        print("Student:", name)
+        print("Marks:", marks)
+        print("Average:", round(average, 2))
+        print("Grade:", grade)
+
+        return func(name, marks)
+
+    return wrapper
+
+
+@calculate_grade
+def student_result(name, marks):
+    print("Result calculated successfully!")
+
+
+# Student data
+student_result("Shubham", [85, 90, 78, 92, 88])
